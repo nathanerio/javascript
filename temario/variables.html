@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>JavaScript - Variables (Var, Let, Const) y Tipos de Datos</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../css/estilos.css">
+  </head>
+  <body>
+    <h1>JavaScript - Variables (Var, Let, Const) y Tipos de Datos</h1>
+    
+    <button id="cambiarVista">Modo: Claro</button>
+
+    <section>
+      <h2>Declaración</h2>
+
+      <p>Para poder declarar una variable vamos a utilizar la palabra reservada <strong>var</strong> de la siguiente forma</p>
+    
+      <code>
+        <span class="reservada">var</span> nombre;
+      </code>
+      
+      <p>Acabamos de declarar una variable llamada nombre</p>
+      
+      <p>En el caso de querer asignarle un valor a esa variable podemos inicializarla de la siguiente forma:</p>
+      
+      <code>nombre = <span class="string">'jonathan'</span>;</code>
+      
+      <p>El simbolo de igual se utilizar para la asignación, es decir, que la variable que esta a la izquierda del igual (nombre) se le asignará como valor el texto que esta a la derecha ('jonathan')</p>
+      
+      <p>Se puede crear una variable e inicializarla en la misma linea de la siguiente forma:</p>
+
+      <code>
+        <span class="reservada">var</span> nombre = <span class="string">'jonathan'</span>;
+      </code>
+      
+      <p>De esta forma, no solo creamos una variable sino que además ya le asignamos un valor</p>
+
+    </section>
+    
+    <section>
+
+      <h2>Tipo de Datos</h2>
+
+      <p>Dentro de JavaScript tenemos principalmente dos tipos de datos los primitivos y los objetos</p>
+
+      <section>
+
+        <h3>Tipo de Datos: Primitivos</h3>
+      
+        <p>Dentro de esta categoría vamos a encontrar los String, Boolean, Number, Null, Undefined</p>
+
+        <h4>Undefined</h4>
+
+        <p><strong>undefined</strong>: Es el valor que tiene por defecto una variable que no fue inicializada</p>
+
+        <code>
+          <span class="reservada">var</span> nombre;
+        </code>
+
+        <code>
+          <span class="reservada">var</span> nombre = <span class="reservada">undefined</span>;
+        </code>
+
+        <h4>Null</h4>
+
+        <p><strong>null</strong>: Es un tipo de dato que representa un valor nulo, la diferencia con undefined es que este valor debe ser asignado y dentro de nuestro código representa la nulificación del valor de la variable, si hablamos de punteros, diriamos que no apunta a nada</p>
+
+        <code>
+          <span class="reservada">var</span> nombre = <span class="reservada">null</span>;
+        </code>
+
+        <h4>String</h4>
+
+        <p><strong>string</strong>: Para poder establecer un valor de string o cadena, dentro de JavaScript tenemos dos posibilidades, o escribimos la cadena dentro de comillas simples ('') o dentro de comillas dobles (""), popularmente la mas utilizadas son las comillas simples</p>
+
+        <code>
+          <span class="reservada">var</span> nombre = <span class="string">'jonathan'</span>;
+        </code>
+
+        <code>
+          <span class="reservada">var</span> nombre = <span class="string">"jonathan"</span>;
+        </code>
+
+        <h4>Number</h4>
+
+        <p><strong>number</strong>: Podemos asignar a una variable un valor entero (12) o un valor de coma flotante como ser (12.3), el delimitador de los decimales dentro de JavaScript será entonces el punto (.)</p>
+
+        <code>
+          <span class="reservada">var</span> edad = 20;
+        </code>
+
+        <code>
+          <span class="reservada">var</span> pi = 3.14;
+        </code>
+
+        <p>Dentro de los posibles valores numericos tenemos 3 adicionales a los numeros y estos son: <strong>Infinity</strong>, <strong>-Infinity</strong> y <strong>NaN</strong></p>
+
+        <p>El valor <strong>Infinity</strong> o su negativo puede obtenerse al realizar una división entre un numero cualquiera y el 0, es decir, si 12 lo dividimos por 0 nos dará infinito, en el caso de que el numero sea negativo, nos dará menos infinito</p>
+
+        <code>12 / 0; <span class="comentario">// Infinity</span></code>
+        <code>-12 / 0; <span class="comentario">// -Infinity</span></code>
+
+        <p>El valor <strong>NaN</strong> representa un Not A Number, es decir, un 'numero' que no es un numero, esto puede obtenerse de varias formas, una de ellas es la division de 0 entre 0</p>
+
+        <code>0 / 0; <span class="comentario">// NaN</span></code>
+
+        <h4>Boolean</h4>
+
+        <p><strong>boolean</strong>: Este tipo de dato solo puede tomar uno de dos valores posibles, estos son verdadero (true) o falso (false)</p>
+
+        <code>
+          <span class="reservada">var</span> verdadero = <span class="boolean">true</span>;
+        </code>
+
+        <code>
+          <span class="reservada">var</span> falso = <span class="boolean">false</span>;
+        </code>
+
+      </section>
+
+      <section>
+
+        <h3>Tipo de Datos: Objetos</h3>
+
+        <h4>Array</h4>
+        <p>Podemos definir a un array como un tipo de dato en el cual almacenaremos varios valores (pueden ser primitivos u objetos), del mismo o diferente tipo que serán accedidos mediante un indice numérico</p>
+        <p>Los arrays se definen utilizando los corchetes ("[ ]") y dentro de ellos los valores se separan por comas (",")
+        
+        <code>
+          <span class="reservada">var</span> vector = [ 1, 2, 3, 4, 5 ];
+        </code>
+
+        <code>
+          <span class="reservada">var</span> nombres = [
+            <span class="string">'Juan'</span>, 
+            <span class="string">'Pedro'</span>, 
+            <span class="string">'Pablo'</span>
+          ];
+        </code>
+
+        <code>
+          <span class="reservada">var</span> varios = [
+              <span class="string">'Hola'</span>, 12, <span class="boolean">true</span>
+            ];
+        </code>
+
+        <p>Para poder obtener un valor dentro del array debemos acceder a la posición del elemento en cuestión, para ello usaremos el nombre del array seguido de unos corchetes y dentro de ellos el numero de indice del elemento, por ejmplo, si quisiese obtener el nombre "Pedro" del array "nombres" definido arriba debería utilizar como indice el uno (1), esto se debe a que los arrays se numeran desde el cero (0) en adelante, es decir, 0, 1, 2, 3, 4, etc.</p>
+
+        <code>
+          nombres[1]; 
+          <span class="comentario">// "Pedro"</span>
+        </code>
+
+
+        <h4>Object</h4>
+        <p>Los objetos en JavaScript se utilizar para almacenar datos de tipo clave / valor, es decir, que necesitamos definir una clave (con la cual se accederá al dato) y un valor para la misma, los tipos de datos de los valores pueden ser primitivos u objetos y pueden ser todos del mismo tipo o distintos</p>
+        <p>Cada par de clave / valor (key / value) debe ser separado por una coma (",")</p>
+        <p>Generalmente estas claves suelen ser llamadas "propiedades" o "metodos", en el caso de que el valor de la clave sea una función diremos que es un "metodo" del objeto, para los otros casos decimos "propiedad" del objeto</p>
+
+        <code>
+          <span class="reservada">var</span> persona = {
+            <span class="tab1">nombre: <span class="string">'Jonathan'</span>, </span>
+            <span class="tab1">edad: 20</span>
+          };
+        </code>
+
+        <p>Para acceder al valor de una propiedad en particular, simplement utilizamos el operador punto ("."), esto significa que deberemos escribir primero el nombre de la variable (que es el objeto propiamente dicho) luego un punto para luego escribir el valor de la clave (key) a la que queremos acceder</p>
+        <p>En caso de querer obtener la edad de la persona que definimos anteriormente deberíamos escribir lo siguiente:</p>
+
+        <code>
+          persona.edad; 
+          <span class="comentario">// 20</span>
+        </code>
+
+        <p>Como dijimos anteriormente, un posible valor puede ser un objeto por lo cual podriamos tener lo siguiente:</p>
+
+        <code>
+          <span class="reservada">var</span> curso = {
+            <span class="tab1">nombre: <span class="string">'JavaScript'</span>,</span>
+            <span class="tab1">clases: [
+              <span class="tab2">{
+                <span class="tab3">nombre: <span class="string">'clase 1'</span>,</span>
+                <span class="tab3">temario: <span class="string">'variables'</span></span>
+              }</span>
+            ]</span>
+          };
+        </code>
+
+        <p>En esta caso estamos definiendo un objeto curso, que tiene como propiedad el nombre del mismo ('JavaScript'), y ademas tiene otra propiedad que es un Array, este ultimo tiene un solo elemento que es un objeto conformado por dos propiedades, el nombre ("Clase 1") y el temario ("variables")</p>
+        <p>En caso de querer acceder al temario de la clase 1 del curso haremos lo siguiente:</p>
+
+        <code>
+          curso.clases[0].temario; <span class="comentario">// "variables"</span>
+        </code>
+
+        <p>Variable (curso), propiedad (clases), primer elemento del array ([0]), propiedad (temario)</p>
+
+
+        <h4>Function</h4>
+
+        <p>Las funciones serán analizadas en el aparatado de Funciones (Function), sin embargo vamos a ver como poder asignarlas a una variable</p>
+
+        <code>
+          <span class="reservada">var</span> fn =
+          <span class="reservada">function</span> () { 
+          <span class="comentario">/* codigo... */ </span> }
+        </code>
+
+        <p>Luego podemos invocar a esa función de la siguiente manera</p>
+        <code>fn();</code>
+
+      </section>
+
+    </section>
+
+    <section>
+
+      <h2>Let y Const</h2>
+
+      <p>En ECMAScript6 se agregaron dos nuevas palabras reservadas para definir variables, estas son let y const</p>
+
+      <h3>Let</h3>
+      <p>Permite definir una variable, lo que significa que su valor puede cambiar durante la ejecución del programa</p>
+
+      <code>
+        <span class="reservada">let</span> numero = 12;
+        <br>
+        numero = 24;
+      </code>
+
+
+      <h3>Const</h3>
+      <p>Permite definir una constante, lo que significa que su valor no puede cambiar durante la ejecución del programa</p>
+
+      <code>
+        <span class="reservada">const</span> pi = 3.14;
+      </code>
+
+      <p>En caso de que tratemos de cambiar el valor de una constante nos va a dar un error</p>
+
+      <code>
+        pi = 3.1415;
+        <span class="error">TypeError: Assignment to constant variable.</span>
+      </code>
+
+      <p>Otro error lo tendriamos si tratamos de definir una constante sin asignarle valor en su definción</p>
+
+      <code>
+        <span class="reservada">const</span> impuesto;
+        <span class="error">SyntaxError: Missing initializer in const declaration</span>
+      </code>
+
+      <p>Como puede verse, siempre que se defina una constante hay que asignarle el valor que llevará dentro de la ejecución del programa</p>
+
+    </section>
+
+    <section>
+
+      <h2>Alcance de las Variables</h2>
+      <p>Dependiendo de en donde creamos una variable define donde va a ser utilizable la misma, eso significa que puede que una variable no este disponible en cualquier parte de nuestro codigo y a eso es lo que se denomena alcance (scope)</p>
+
+      <p>En un principio diremos que las variables definidas con <strong>var</strong> seran variables con alcance (scope) de función, sin embargo, si estas no se definen dentro de ninguna función entonces seran variables globales</p>
+
+      <p>En cambio decimos que las variables definidas con <storng>let</storng> y <strong>const</strong> seran variables con alcance (scope) de bloque, si estas no se definen dentro de ningun bloque puntual diremos que son variables locales, no decimos que son globales porque no se asocian al objeto global window</p>
+
+      <code>
+        <span class="reservada">var</span> nombre = <span class="string">'jonathan'</span>;
+        <br><br>
+        <span class="reservada">function</span> mostrarNombre() {
+          <span class="tab1"><span class="reservada">console.log</span>(nombre);</span>
+        }
+        <br><br>
+        mostrarNombre(); <span class="comentario">// "jonathan";</span>
+      </code>
+
+      <p>Como se puede observar en el código anterior, a pesar de haber definido la variable por fuera de la función, puede ser utilizada si ningun problema dentro de la misma, esto se debe a que la variable nombre es global</p>
+
+      <p>Ahora, si nosotros definimos una variable dentro de la función y tratamos de utilizarla por fuera de la misma</p>
+
+      <code>
+        <span class="reservada">function</span> mostrarNombre() {
+          <span class="tab1"><span class="reservada">var</span> local = <span class="string">'variable local'</span>;</span>
+          <span class="tab1"><span class="reservada">console.log</span>(local);</span>
+        }
+        <br><br>
+        mostrarNombre(); <span class="comentario">// "variable local";</span>
+        <br>
+        <span class="reservada">console.log</span>(local);
+        <span class="error">ReferenceError: local is not defined</span>
+      </code>
+
+      <p>Nos terminará dado un error de referencia, dado que la variable local no existe en ese punto, puesto que la variable local, como su nombre lo indica, es local a la función mostrarNombre</p>
+
+      <p>A diferencia de <strong>var</strong> las variables definidas por <strong>let</strong> y <strong>const</strong> diremos que tiene un alcance mas limitado, dado que su limite esta dado por un bloque de codigo, crearemos a continuación un bloque de codigo anonimo donde definiremos una variable <strong>let</strong> dentro y trataremos de utilizarla por fuera de la misma</p>
+
+      <code>
+        {
+          <span class="tab1">
+            <span class="reservada">let</span> apellido = <span class="string">'j'</span>;
+          </span>
+        }
+        <br>
+        <span class="reservada">console.log</span>(apellido);
+        <span class="error">ReferenceError: apellido is not defined</span>
+      </code>
+
+      <p>Sin embargo el mismo código con <strong>var</strong> funcionaría</p>
+
+      <code>
+        {
+          <span class="tab1">
+            <span class="reservada">var</span> apellido = <span class="string">'j'</span>;
+          </span>
+        }
+        <br>
+        <span class="reservada">console.log</span>(apellido); <span class="comentario">// "j"</span>
+      </code>
+
+      <p>Estos "bloques" lo encontraremos en JavaScript en varios lugares como ser los condicionales (If / Else), los Switch, los ciclos de repetición (While, Do While, For), las funciones (Function), etc.</p>
+    </section>
+
+
+    <script src="../js/script.js"></script>
+  </body>
+</html>

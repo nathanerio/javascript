@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>JavaScript - DOM (Document Object Model) y Eventos (Event)</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../css/estilos.css">
+  </head>
+  <body>
+    <h1>JavaScript - DOM (Document Object Model) y Eventos (Event)</h1>
+
+    <section>
+      <h2>DOM</h2>
+
+      <p>El Modelo de Objetos del Documento es una API que proporciona la representacion del documento, da formas de acceder a los elementos y poder modificarlos, basicamente es la API que nos permite manipular el documento desde los scripts</p>
+
+      <h3>Manipulacion de elementos</h3>
+
+      <p>Tenemos un objeto global llamado "document" el cual tiene metodos asociados para poder manipular los elementos del documento, estos metodos permiten seleccionar elementos del HTML ya se por un nombre de etiqueta, un nombre de clase, un id en especifico, etc. Veamos los metodos que permiten seleccionar elementos del HTML</p>
+
+      <h4>document.getElementById</h4>
+      <p>En el caso de que el elemento que queremos seleccionar tenga un id en especifico podemos obtener la referencia a ese elemento utilizando este método de la siguiente forma:</p>
+
+      <p>Si nuestro HTML es el siguiente:</p>
+      <code>
+        &lt;body&gt;
+          <span class="tab1">
+            &lt;h1 id="titulo"&gt;JavaScript - DOM (Document Object Model) y Eventos (Event)​&lt;/h1&gt;
+          </span>
+        &lt;/body&gt;
+      </code>
+
+      <p>Puedo seleccionar ese H1 de la siguiente forma:</p>
+
+      <code>
+        <span class="reservada">var</span> h1 = 
+        <span class="reservada">document.getElementById</span>('titulo');
+        <br><br>
+        <span class="reservada">console.log</span>(h1);
+        <span class="comentario">// &lt;h1 id=​"titulo"&gt;JavaScript - DOM (Document Object Model) y Eventos (Event)​&lt;/h1&gt;</span>
+      </code>
+
+      <p>El metodo getElementById puede retornar dos posibles valores, en caso de que el elemento exista sera una referencia a ese elemento pero en caso de que el parámetro no coincida con ningun valor de id de la pagina devolverá <strong>null</strong></p>
+
+      <h4>document.getElementsByClassName</h4>
+
+      <p>En el caso de que el/los elemento/elementos que queremos seleccionar tenga un nombre de clase en especifico podemos obtener la referencia a ese elemento utilizando este método de la siguiente forma:</p>
+
+      <p>Si nuestro HTML es el siguiente:</p>
+      <code>
+        &lt;body&gt;
+          <span class="tab1">
+            &lt;span class="destacado"&gt;DOM&lt;/span&gt;
+          </span>
+          <span class="tab1">
+            &lt;span class="destacado"&gt;Eventos&lt;/span&gt;
+          </span>
+        &lt;/body&gt;
+      </code>
+
+      <p>Puedo seleccionar esos span de la siguiente forma:</p>
+
+      <code>
+        <span class="reservada">var</span> spans = 
+        <span class="reservada">document.getElementsByClassName</span>('destacado');
+        <br><br>
+        <span class="reservada">console.log</span>(spans);
+        <span class="comentario">// HTMLCollection(2) [span.destacado, span.destacado]</span>
+      </code>
+
+      <p>Este metodo devuelve un HTMLCollection que es una interfaz generica de elementos, esta coleccion esta viva, lo que significa que se actualizará si el documento cambia.</p>
+
+      <p>En caso de que el parametro del metodo getElementsByClassName no coincida con ningun valor de clase del elemento el metodo devolverá una HTMLCollection vacia</p>
+
+      <h4>document.getElementsByTagName</h4>
+      
+      <p>Este metodo me da acceso a los elementos solo mencionando cual es el tag con el cual estan contenidos, es decir, que no es necesario establecer ningun id ni clase</p>
+
+      <p>Si nuestro HTML es el siguiente:</p>
+      <code>
+        &lt;body&gt;
+          <span class="tab1">
+            &lt;p&gt;DOM&lt;/p&gt;
+          </span>
+          <span class="tab1">
+            &lt;p&gt;Eventos&lt;/p&gt;
+          </span>
+        &lt;/body&gt;
+      </code>
+
+      <p>Puedo seleccionar esos parrafos de la siguiente forma:</p>
+
+      <code>
+        <span class="reservada">var</span> parrafos = 
+        <span class="reservada">document.getElementsByTagName</span>('p');
+        <br><br>
+        <span class="reservada">console.log</span>(parrafos);
+        <span class="comentario">// HTMLCollection(2) [p, p]</span>
+      </code>
+
+      <p>Este metodo, al igual que getElementsByClassName, devuelve un HTMLCollection que es una interfaz generica de elementos, esta coleccion esta viva, lo que significa que se actualizará si el documento cambia.</p>
+
+      <p>En caso de que el parametro del metodo getElementsByTagName no coincida con ningun valor de clase del elemento el metodo devolverá una HTMLCollection vacia</p>
+
+      <h4>document.querySelector</h4>
+      <p>Este metodo permite seleccionar elementos en base a selectores (como los que utilizamos en CSS), es decir, que el parametro puede ser por ejemplo 'p', 'h1', 'li' o el nombre de una clase como ser '.clase' o el valor de un id por ejemplo '#titulo', como se puede ver las clases comienzan con un punto (.) y los ids con un numeral (#) igual que en CSS</p>
+
+      <p>Si nuestro HTML es el siguiente:</p>
+      <code>
+        &lt;body&gt;
+          <span class="tab1">
+            &lt;p&gt;DOM&lt;/p&gt;
+          </span>
+          <span class="tab1">
+            &lt;p&gt;Eventos&lt;/p&gt;
+          </span>
+        &lt;/body&gt;
+      </code>
+
+      <p>Puedo seleccionar el primer parrafo de la siguiente forma:</p>
+
+      <code>
+        <span class="reservada">var</span> parrafos = 
+        <span class="reservada">document.querySelector</span>('p');
+        <br><br>
+        <span class="reservada">console.log</span>(parrafos);
+        <span class="comentario">// &lt;p&gt;DOM​&lt;/p&gt;</span>
+      </code>
+
+      <p>querySelector devuelve el PRIMER elemento que coincida con el selector pasado como parámetro, en el caso de que no haya ningun elemento que coincida con ese selector el método devuelve <strong>null</strong></p>
+
+      <h4>document.querySelectorAll</h4>
+      
+      <p>En el caso de que queramos seleccionar TODOS los elementos que coincidan con un determinado selector debemos utilizar este metodo</p>
+
+      <p>Si nuestro HTML es el siguiente:</p>
+      <code>
+        &lt;body&gt;
+          <span class="tab1">
+            &lt;p&gt;DOM&lt;/p&gt;
+          </span>
+          <span class="tab1">
+            &lt;p&gt;Eventos&lt;/p&gt;
+          </span>
+        &lt;/body&gt;
+      </code>
+
+      <p>Puedo seleccionar todos parrafo de la siguiente forma:</p>
+
+      <code>
+        <span class="reservada">var</span> parrafos = 
+        <span class="reservada">document.querySelectorAll</span>('p');
+        <br><br>
+        <span class="reservada">console.log</span>(parrafos);
+        <span class="comentario">//  NodeList(22) [p, p]</span>
+      </code>
+
+      <p>En esta caso el método devolverá una lista de nodos (NodeList), la cual es una coleccion de nodos vivos. No es un Array propiamente dicho pero tiene internamente un metodo para iterarse similar a los Arrays y este es el forEach</p>
+
+      <p>En caso de que el selector no coincida con ningun elemento devuelve una lista de nodos vacia</p>
+
+    </section>
+
+    <section>
+      <h2>Event</h2>
+
+      <h4>element.addEventListener</h4>
+
+      <p>Para poder darle interacción a nuestro sitio debemos comenzar a establecer respuesta a posibles eventos dentro de nuevos elementos de la páginas, estos eventos pueden ser por ejemplo el click sobre un boton</p>
+
+      <p>Si nuestro HTML es el siguiente:</p>
+      <code>
+        &lt;body&gt;
+          <span class="tab1">
+            &lt;button&gt;CLICK&lt;/button&gt;
+          </span>
+        &lt;/body&gt;
+      </code>
+
+      <p>Podemos asignarle una respuesta al evento click sobre ese boton desde JavaScript de la siguiente forma</p>
+
+      <code>
+        <span class="reservada">var</span> boton = 
+        <span class="reservada">document.querySelector</span>('button');
+        <br><br>
+        boton.<span class="reservada">addEventListener</span>('click', function(e) {
+          <span class="tab1">
+            <span class="reservada">console.log</span>('click');
+          </span>
+        });
+      </code>
+
+      <p>Una vez que hagamos click sobre el boton veremos en la consola "click"</p>
+
+      <p>El método addEventListener recibe tres parámetros</p>
+
+      <p>elemento.addEventListener(tipoDeEvento, funcionAEjecutar, usarCaptura)</p>
+
+      <ul>
+        <li>
+          <strong>tipoDeEvento</strong>: aca definimos en un string el tipo de evento que vamos a estar escuchando como ser "click", "submit", "change"
+        </li>
+        <li>
+          <strong>funcionAEjecutar</strong>: aca va o la referencia a una función o directamente escribimos una función anonima / función flecha que se ejecutará cuando suceda el evento
+        </li>
+        <li>
+          <strong>usarCaptura</strong>: valor boolean que determina en que momento se ejecutar el evento, por defecto (false) será en el burbujeo (bubbling), si establecemos verdadero (true) sera en el momento de la captura (capturing)
+        </li>
+      </ul>
+
+
+      <h5>Usar Captura</h5>
+
+      <p>Si nuestro HTML es el siguiente:</p>
+
+      <code>
+        &lt;body&gt;
+          <span class="tab1">
+            &lt;div class="uno" style="width:400px; height:400px; background-color:blue;"&gt;1
+              <span class="tab2">
+                &lt;div class="dos" style="width:200px; height:200px; background-color:red;"&gt;2
+                <span class="tab3">
+                  &lt;div class="tres" style="width:100px; height:100px; background-color:green;"&gt;3&lt;/div&gt;
+                </span>
+                &lt;/div&gt;
+              </span>
+            &lt;/div&gt;
+          </span>
+        &lt;/body&gt;
+      </code>
+
+      <h5>Burbujeo (bubbling)</h5>
+
+      <code>
+        <span class="reservada">var</span> uno = <span class="reservada">document.querySelector</span>('.uno');
+
+        <br>
+
+        <span class="reservada">var</span> dos = <span class="reservada">document.querySelector</span>('.dos');
+
+        <br>
+
+        <span class="reservada">var</span> tres = <span class="reservada">document.querySelector</span>('.tres');
+
+        <br><br>
+
+        uno.<span class="reservada">addEventListener</span>('click', () => {
+          <span class="tab1">
+            <span class="reservada">console.log</span>('UNO');
+          </span>
+        });
+
+        <br><br>
+
+        dos.<span class="reservada">addEventListener</span>('click', () => {
+          <span class="tab1">
+            <span class="reservada">console.log</span>('DOS');
+          </span>
+        });
+
+        <br><br>
+
+        tres.<span class="reservada">addEventListener</span>('click', () => {
+          <span class="tab1">
+            <span class="reservada">console.log</span>('TRES');
+          </span>
+        });
+      </code>
+
+      <p>En el caso de hacer click sobre el <strong>div</strong> "tres" en la consola veriamos</p>
+
+      <code>
+        <span class="string">TRES</span>
+        <br>
+        <span class="string">DOS</span>
+        <br>
+        <span class="string">UNO</span>
+      </code>
+
+      <h5>Captura (capturing)</h5>
+
+      <p>En el caso de querer utilizar la captura, vamos a modificar nuestro código JavaScript para que el click sobre el <strong>div</strong> "uno" utilice la captura</p>
+
+      <code>
+        <span class="reservada">var</span> uno = <span class="reservada">document.querySelector</span>('.uno');
+
+        <br>
+
+        <span class="reservada">var</span> dos = <span class="reservada">document.querySelector</span>('.dos');
+
+        <br>
+
+        <span class="reservada">var</span> tres = <span class="reservada">document.querySelector</span>('.tres');
+
+        <br><br>
+
+        uno.<span class="reservada">addEventListener</span>('click', () => {
+          <span class="tab1">
+            <span class="reservada">console.log</span>('UNO');
+          </span>
+        }, <span class="reservada">true</span>);
+
+        <br><br>
+
+        dos.<span class="reservada">addEventListener</span>('click', () => {
+          <span class="tab1">
+            <span class="reservada">console.log</span>('DOS');
+          </span>
+        });
+
+        <br><br>
+
+        tres.<span class="reservada">addEventListener</span>('click', () => {
+          <span class="tab1">
+            <span class="reservada">console.log</span>('TRES');
+          </span>
+        });
+      </code>
+
+      <p>Como podemos ver el addEventListener para la variable uno tiene el tercer parametro en true</p>
+
+      <p>La ejecución del click sobre el <strong>div</strong> "tres" ahora nos muestra en la consola lo siguiente</p>
+
+      <code>
+        <span class="string">UNO</span>
+        <br>
+        <span class="string">TRES</span>
+        <br>
+        <span class="string">DOS</span>
+      </code>
+
+    </section>
+
+  </body>
+</html>

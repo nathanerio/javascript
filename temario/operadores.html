@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>JavaScript - Operadores (Compraración, Logicos, Aritméticos)</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../css/estilos.css">
+  </head>
+  <body>
+    <h1>JavaScript - Operadores (Compraración, Logicos, Aritméticos)</h1>
+    
+    <button id="cambiarVista">Modo: Claro</button>
+
+    <section>
+      <h2>Artiméticos</h2>
+      <p>Los operadores aritméticos nos van a permitir realizar calculos matematicos</p>
+
+      <h4>Suma</h4>
+
+      <p><strong>Suma</strong>: Para realizar una suma debemos utilizar el operador más (+)</p>
+
+      <code>
+        12 + 3; <span class="comentario">// 15</span>
+      </code>
+
+      <h4>Resta</h4>
+
+      <p><strong>Resta</strong>: Para realizar una resta debemos utilizar el operador menos (-)</p>
+
+      <code>
+        12 - 3; <span class="comentario">// 9</span>
+      </code>
+
+      <h4>Multiplicación</h4>
+
+      <p><strong>Multiplicación</strong>: Para realizar una multiplicación debemos utilizar el operador asterisco (*)</p>
+
+      <code>
+        12 * 3; <span class="comentario">// 36</span>
+      </code>
+
+      <h4>División</h4>
+
+      <p><strong>División</strong>: Para realizar una división debemos utilizar el operador barra (/)</p>
+
+      <code>
+        12 / 3; <span class="comentario">// 4</span>
+      </code>
+
+      <h4>Módulo</h4>
+
+      <p><strong>Módulo</strong>: Para obtener el módulo debemos utilizar el operador porcentaje (%)</p>
+      <p>Vale aclarar que el <strong>módulo</strong> es el resto de la división</p>
+
+      <code>
+        12 % 3; <span class="comentario">// 0</span>
+      </code>
+
+      <code>
+        11 % 3; <span class="comentario">// 2</span>
+      </code>
+
+    </section>
+
+    <section>
+      <h2>Compraración</h2>
+
+      <p>Los operadores de comparación van a devolver verdadero (true) o falso (false) dependiendo de como se evalue esa comparación</p>
+
+      <h4>Mayor</h4>
+      <p>Para hacer una comparación de mayor debemos utilizar el operador &gt;, al utilizarlo diremos que el operando de la izquierda es mayor que el operando de la derecha, en caso de que esto sea cierto se devolvera true, caso contrario false. Veamos un ejemplo</p>
+
+      <code>
+        18 &gt; 12 <span class="comentario">// true</span>
+      </code>
+
+      <p>Estamos preguntando si el numero 18 es mayor que el numero 12, lo cual es cierto</p>
+
+      <h4>Menor</h4>
+
+      <p>Para hacer una comparación de menor debemos utilizar el operador &lt;, al utilizarlo diremos que el operando de la izquierda es menor que el operando de la derecha, en caso de que esto sea cierto se devolvera true, caso contrario false. Veamos un ejemplo</p>
+
+      <code>
+        18 &lt; 12 <span class="comentario">// false</span>
+      </code>
+
+      <p>Estamos preguntando si el numero 18 es menor que el numero 12, lo cual es falso</p>
+
+      <h4>Mayor o Igual / Menor o Igual</h4>
+      <p>Puede darse el caso que en la comparación querramos tener en cuenta la igualdad, por ejemplo, si lo que queremos es hacer una verificación de mayoría de edad (teniendo en cuenta que esta empieza a la edad de los 18) tenemos las siguientes posibilidades</p>
+
+      <code>
+        <span class="reservada">var</span> edad = 18;
+        <br><br>
+        edad > 18; <span class="comentario">// false</span>
+        <br><br>
+        edad > 17; <span class="comentario">// true</span>
+        <br><br>
+        edad >= 18; <span class="comentario">// true</span>
+      </code>
+
+      <p>Si queremos saber si es menor, tenemos el caso contrario</p>
+
+      <code>
+        <span class="reservada">var</span> edad = 17;
+        <br><br>
+        edad < 17; <span class="comentario">// false</span>
+        <br><br>
+        edad < 18; <span class="comentario">// true</span>
+        <br><br>
+        edad <= 17; <span class="comentario">// true</span>
+      </code>
+
+      <h4>Igualdad</h4>
+      <p>Para hacer una comparación de igualdad no podemos utilizar solamente un igual (=) dado que este operador dentro de JavaScript es utilizado para la asignación es por ello que tenemos que recurrir a dos posibles operadores: doble igual (==) o triple igual (===), veamos un ejemplo y luego veamos la diferencia</p>
+
+      <code>
+        12 == <span class="string">"12"</span>; <span class="comentario">// true</span>
+        <br><br>
+        12 === <span class="string">"12"</span>; <span class="comentario">// false</span>
+      </code>
+
+      <p>Como podemos ver la primera igualdad (doble igual ==) no esta haciendo un chequeo por tipo de dato, lo que esta sucediendo es que en la comparación se esta haciendo una conversión de dato a uno en común y luego se comparan</p>
+      <p>Sin embargo en el la segunda igualdad (triple igual ===) es una igualdad estricta, no solo se fija en el valor sino que ademas el tipo de dato tiene que ser el mismo, como aca se esta comparando un number con un string su valor de igualdad sera falso</p>
+
+
+      <h4>Desigualdad</h4>
+      <p>Similar a lo que tuvimos en la igualdad habra una desigualdad y una desigualdad estricta donde el tipo de dato se tiene en cuenta</p>
+      <p>En esta caso la desigualdad es "no igual" (!=) y la desigualdad estricta será "no igual igual" (!==)</p>
+
+      <code>
+        12 != <span class="string">"12"</span>; <span class="comentario">// false</span>
+        <br><br>
+        12 !== <span class="string">"12"</span>; <span class="comentario">// true</span>
+      </code>
+
+      <p>En el primer caso, como se realiza una conversión de tipo de dato, los valores serán iguales por lo cual la desigualdad dara falsa, sin embargo, en el segundo caso, como los tipos de datos son distintos la desigualdad es verdadera sin analizar siquiera los valores</p>
+
+    </section>
+
+    <section>
+      <h2>Logicos</h2>
+      <p>Estos operadores nos permiten evaluar dos sentencias según sea su valor de verdad</p>
+      <p>Para poder comprender que resultado conseguiremos con cada uno de los operadores necesitamos tener bien en claro las tablas de la verdad, cada operador tiene asociada su propia tabla que se detalla en cada uno</p>
+      
+      <h4>Y (AND)</h4>
+
+      <table class="tabla-verdad">
+        <tr>
+          <th>A</th>
+          <th>AND (&&)</th>
+          <th>B</th>
+        </tr>
+        <tr>
+          <td>V</td>
+          <td>V</td>
+          <td>V</td>
+        </tr>
+        <tr>
+          <td>V</td>
+          <td>F</td>
+          <td>F</td>
+        </tr>
+        <tr>
+          <td>F</td>
+          <td>F</td>
+          <td>V</td>
+        </tr>
+        <tr>
+          <td>F</td>
+          <td>F</td>
+          <td>F</td>
+        </tr>
+      </table>
+
+      <p>El operador AND (&&) será verdadero cuando sus dos proposiciones a evaluar son verdaderas</p>
+
+      <code>
+        <span class="reservada">var</span> nombre = <span class="string">'jonathan'</span>;
+        <br><br>
+        <span class="reservada">var</span> edad = 20;
+        <br><br>
+        (nombre === <span class="string">'jonathan'</span>) && (edad >= 18); <span class="comentario">// true</span>
+        <br><br>
+        (nombre === <span class="string">'carlos'</span>) && (edad >= 18); <span class="comentario">// false</span>
+      </code>
+
+      <table class="tabla-verdad">
+        <tr>
+          <th>
+            (nombre === <span class="string">'jonathan'</span>)
+          </th>
+          <th>AND (&&)</th>
+          <th>
+            (edad >= 18)
+          </th>
+        </tr>
+        <tr>
+          <td>V</td>
+          <td>V</td>
+          <td>V</td>
+        </tr>
+      </table>
+
+      <p>En la primer evaluación de AND tanto (nombre === <span class="string">'jonathan'</span>) como (edad >= 18) es verdadero, por lo cual el resultado del AND será verdadero</p>
+
+      <table class="tabla-verdad">
+        <tr>
+          <th>
+            (nombre === <span class="string">'carlos'</span>)
+          </th>
+          <th>AND (&&)</th>
+          <th>
+            (edad >= 18)
+          </th>
+        </tr>
+        <tr>
+          <td>F</td>
+          <td>F</td>
+          <td>V</td>
+        </tr>
+      </table>
+
+      <p>Sin embargo en la segunda evaluación de AND tanto (nombre === <span class="string">'carlos'</span>) es falso, por lo cual el resultado de la evaluación del AND será tambien falso</p>
+
+      <h4>O (OR)</h4>
+
+      <table class="tabla-verdad">
+        <tr>
+          <th>A</th>
+          <th>AND (&&)</th>
+          <th>B</th>
+        </tr>
+        <tr>
+          <td>V</td>
+          <td>V</td>
+          <td>V</td>
+        </tr>
+        <tr>
+          <td>V</td>
+          <td>V</td>
+          <td>F</td>
+        </tr>
+        <tr>
+          <td>F</td>
+          <td>V</td>
+          <td>V</td>
+        </tr>
+        <tr>
+          <td>F</td>
+          <td>F</td>
+          <td>F</td>
+        </tr>
+      </table>
+
+      <p>A diferencia del operador AND el operador OR (||) sera falso cuando sus dos proposiciones sean falsas. Por lo cual decimos que es suficiente que al menos un elemento sea verdadero para que el OR de verdadero</p>
+
+
+      <code>
+        <span class="reservada">var</span> nombre = <span class="string">'jonathan'</span>;
+        <br><br>
+        <span class="reservada">var</span> edad = 20;
+        <br><br>
+        (nombre === <span class="string">'jonathan'</span>) || (edad >= 18); <span class="comentario">// true</span>
+        <br><br>
+        (nombre === <span class="string">'carlos'</span>) || (edad >= 18); <span class="comentario">// true</span>
+        <br><br>
+        (nombre === <span class="string">'carlos'</span>) || (edad >= 28); <span class="comentario">// false</span>
+      </code>
+
+      <table class="tabla-verdad">
+        <tr>
+          <th>(nombre === <span class="string">'jonathan'</span>)</th>
+          <th>OR (||)</th>
+          <th>(edad >= 18)</th>
+        </tr>
+        <tr>
+          <td>V</td>
+          <td>V</td>
+          <td>V</td>
+        </tr>
+      </table>
+
+      <table class="tabla-verdad">
+        <tr>
+          <th>(nombre === <span class="string">'carlos'</span>)</th>
+          <th>OR (||)</th>
+          <th>(edad >= 18)</th>
+        </tr>
+        <tr>
+          <td>F</td>
+          <td>V</td>
+          <td>V</td>
+        </tr>
+      </table>
+
+      <table class="tabla-verdad">
+        <tr>
+          <th>(nombre === <span class="string">'carlos'</span>)</th>
+          <th>OR (||)</th>
+          <th>(edad >= 28)</th>
+        </tr>
+        <tr>
+          <td>F</td>
+          <td>F</td>
+          <td>F</td>
+        </tr>
+      </table>
+
+
+
+
+
+
+
+
+
+      <h4>NO (NOT)</h4>
+
+      <p>El operador NOT (!) niega el valor de verdad de un operando, su tabla de la verdad es la siguiente</p>
+
+      <table class="tabla-verdad">
+        <tr>
+          <th>A</th>
+          <th>!A</th>
+        </tr>
+        <tr>
+          <td>V</td>
+          <td>F</td>
+        </tr>
+        <tr>
+          <td>F</td>
+          <td>V</td>
+        </tr>
+      </table>
+
+      <code>
+        <span class="reservada">var</span> verdadero = <span class="boolean">true</span>;
+        <br><br>
+        <span class="reservada">console.log</span>(!verdadero); <span class="comentario">// false</span>  
+      </code>
+
+
+    </section>
+
+    <script src="../js/script.js"></script>
+  </body>
+</html>

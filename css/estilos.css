@@ -1,0 +1,168 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  padding: 20px;
+  font-family: Arial, Verdana, sans-serif;
+}
+
+button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background-color: orange; /* #9A91FA */
+  color: black;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+button:focus {
+  outline: none;
+}
+
+.oscuro {
+  background-color: black;
+  color: white;
+}
+
+.oscuro h1 {
+  color: black;
+}
+
+.oscuro code, .oscuro section {
+  border-color: white;
+}
+
+.tab1, .tab2, .tab3, .tab4, .tab5, .tab6, .tab7, .tab8, .tab9, .tab10 {
+  display: block;
+}
+
+.tab1 { padding-left: 10px; }
+.tab2 { padding-left: 20px; }
+.tab3 { padding-left: 30px; }
+.tab4 { padding-left: 40px; }
+.tab5 { padding-left: 50px; }
+.tab6 { padding-left: 60px; }
+.tab7 { padding-left: 70px; }
+.tab8 { padding-left: 80px; }
+.tab9 { padding-left: 90px; }
+.tab10 { padding-left: 100px; }
+
+h1 {
+  text-align: center;
+  padding: 10px;
+  background-color: #F7DF1E;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin-bottom: 10px;
+}
+
+h4 {
+  padding-top: 10px;
+  border-top: 2px solid black;
+}
+
+section {
+  border: 1px dashed black;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+code {
+  position: relative;
+  display: block;
+  border: 1px solid black;
+  padding: 25px 20px 20px;
+  margin: 20px 0;
+  box-shadow: 1px 1px 1px #555;
+}
+
+code::before {
+  position: absolute;
+  content: 'Código';
+  padding: 5px;
+  background-color: orange;
+  color: black;
+  font-weight: bold;
+  top: -12px;
+  left: 10px;
+  border: 1px solid black;
+  box-shadow: 1px 1px 1px #555;
+}
+
+.reservada {
+  color: blue;
+  font-weight: bold;
+}
+
+.comentario {
+  color: green;
+}
+
+.string {
+  color: red;
+}
+
+.boolean {
+  font-weight: bold;
+  color: darkblue;
+}
+
+.error {
+  display: block;
+  background-color: #FAE6E6;
+  color: red;
+  margin-top: 10px;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.error::before {
+  display: inline-block;
+  content: '×';
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  text-align: center;
+  line-height: 20px;
+  font-weight: bold;
+  margin-right: 10px;
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+.temario {
+  padding: 40px;
+  background-color: #F6C991;
+}
+
+.temario a {
+  color: black;
+  text-decoration: none;
+}
+
+.temario a:hover {
+  text-decoration: underline;
+}
+
+.tabla-verdad {
+  min-width: 200px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.tabla-verdad th {
+  background-color: orange;
+  padding:0 10px;
+}
+
+.tabla-verdad td, .tabla-verdad th {
+  border: 1px solid black;
+}
