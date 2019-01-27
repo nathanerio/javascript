@@ -21,6 +21,10 @@ button {
   margin-bottom: 10px;
 }
 
+ul {
+  padding-left: 20px;
+}
+
 button:focus {
   outline: none;
 }
@@ -59,7 +63,7 @@ h1 {
   background-color: #F7DF1E;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1, h2, h3, h4, h5, h6, p, ul {
   margin-bottom: 10px;
 }
 

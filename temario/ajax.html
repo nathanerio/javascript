@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>JavaScript - Asincronismo: setTimeout, setInterval y AJAX</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../css/estilos.css">
+  </head>
+  <body>
+    <h1>JavaScript - Asincronismo: setTimeout, setInterval y AJAX</h1>
+
+    <section>
+      <h2>Asincronismo</h2>
+      <p>El termino bastamente utilizado AJAX significa JavaScript y XML asincrónico, pero ¿que es asincrónico?, basicamente lo que vamos a decir es que esa parte del codigo no se ejecutará inmediatamente, sino que lo hará luego de un determinado periodo de tiempo, veamos un ejemplo</p>
+
+      <code>
+        <span class="reservada">console.log</span>('Primer print');
+        <br>
+        <span class="reservada">console.log</span>('Segundo print');
+        <br>
+        <span class="reservada">console.log</span>('Tercer print');
+        <br><br>
+        <span class="comentario">
+          // Primer print
+          <br>
+          // Segundo print
+          <br>
+          // Tercer print
+        </span>
+      </code>
+
+      <p>Este código que tenemos arriba es sincrónico, es decir, que se ejecuta linea por linea en el orden establecido, sin embargo, cuando empezamos a trabajar con métodos asincrónicos, veremos que la linealidad del código no representa su ejecución real, por lo tanto, la línea de codigo número 5 podría ejecutarse luego de la línea de código 10</p>
+
+      <h3>setTimeout</h3>
+
+      <p>Ahora lo que vamos a hacer es reescribir el codigo utilizando el setTimeout</p>
+      <p>La idea de este metodo es que ejecutará una determinada función luego de un determinado tiempo, recibe 2 parametros el primero es la función a ejecutar, el segundo el periodo de tiempo a esperar en milisegundos</p>
+
+      <code>
+        <span class="reservada">console.log</span>('Primer print');
+        <br>
+        <span class="reservada">setTimeout</span>(() => {
+          <br>
+          <span class="tab1"><span class="reservada">console.log</span>('Segundo print');</span>
+        }, 1000);
+        <br>
+        <span class="reservada">console.log</span>('Tercer print');
+        <br>
+        <span class="comentario">
+          // Primer print
+          <br>
+          // Tercer print
+          <br>
+          // Segundo print
+        </span>
+      </code>
+
+      <p>En este caso estoy ejecutando el console.logo('Segundo print') luego de 1000 milisegundos (es decir, 1 segundo), y como podemos ver la salida por la consola hace que ese "Segundo print" aparezca al final</p>
+      <p>Sin embargo, aunque usemos como valor de tiempo 0 el resultado será igual que el anterior</p> 
+
+      <code>
+        <span class="reservada">console.log</span>('Primer print');
+        <br>
+        <span class="reservada">setTimeout</span>(() => {
+          <br>
+          <span class="tab1"><span class="reservada">console.log</span>('Segundo print');</span>
+        }, 0);
+        <br>
+        <span class="reservada">console.log</span>('Tercer print');
+        <br>
+        <span class="comentario">
+          // Primer print
+          <br>
+          // Tercer print
+          <br>
+          // Segundo print
+        </span>
+      </code>
+
+      <p>Esto se debe a que, aunque el tiempo sea 0 (es decir inmediatamente), el navegador esta delegando esa parte del codigo a una segunda etapa y sigue procesando todo el codigo sincronico que tiene mas abajo, veamos un ejemplo mas extremo, luego de establecer un setTimeout en 0, vamos a realizar un ciclo de repetición de 0 a 100 mostrando los numeros por consola, y como podremos ver, el setTimeout se ejecutará despues de haber procesado todo ese ciclo</p>
+
+      <code>
+        <span class="reservada">console.log</span>('Primer print');
+        <br><br>
+        <span class="reservada">setTimeout</span>(() => {
+          <br>
+          <span class="tab1"><span class="reservada">console.log</span>('Segundo print');</span>
+        }, 0);
+        <br><br>
+        <span class="reservada">for</span>(<span class="reservada">let</span> i = 0; i < 101; i++) {
+          <span class="tab1"><span class="reservada">console.log</span>(i);</span>
+        }
+        <br><br>
+        <span class="reservada">console.log</span>('Tercer print');
+        <br><br>
+        <span class="comentario">
+          // Primer print
+          <br>
+          // 1 
+          <br>
+          // ... 
+          <br>
+          // 100
+          <br>
+          // Tercer print
+          <br>
+          // Segundo print
+        </span>
+      </code>
+
+      <p>Es decir que el navegador primero procesará todo el código sincronico para luego procesar lo que delego de manera asincrónica, esto hay que tenerlo en cuenta, no siempre los tiempos que uno espera son los que van a suceder realmente, pero mas adelante veremos que ni siquiera podremos establecer un tiempo, simplemente deberemos esperar a que el proceso termine</p>
+
+      <p>La sintaxis completa del setTimeout es la siguiente:</p>
+
+      <p>const idTimeout = setTimeout(funcionAEjecutar, tiempoAEsperar, parametro1APasarALaFuncionLlamada, parametro2APasarALaFuncionLlamada, parametroEtcAPasarALaFuncionLlamada)</p>
+
+      <ul>
+        <li>idTimeout: La función setTimeout devuelve un numero para poder cancelar/limpiar ese timeout</li>
+        <li>funcionAEjecutar: Como vimos anteriormente esa función sera la que se ejecute cuando pase el tiempo establecido</li>
+        <li>tiempoAEsperar: Tiempo a esperar para ejecutar la funcion pasada en el parámetro anterior</li>
+        <li>parametro1APasarALaFuncionLlamada ...: Parámetros a pasar a la función que invocará la función timeout</li>
+      </ul>
+
+      <p>Veamos un ejemplo completo:</p>
+
+      <code>
+        <span class="reservada">const</span> idTimeout = <span class="reservada">setTimeout</span>((nombre) => {
+        <br>
+          <span class="tab1"><span class="reservada">console.log</span>(<span class="string">'El nombre es : '</span>, nombre)</span>
+        }, 1000, <span class="string">'Jonathan'</span>);
+        <br>
+        <span class="reservada">console.log</span>(<span class="string">'ID: '</span>, idTimeout);
+
+        <br><br>
+
+        <span class="comentario">
+          // ID: 1
+          <br>
+          // El nombre es : Jonathan
+        </span>
+      </code>
+
+      <h3>clearTimeout</h3>
+
+      <p>El valor de retorno de un setTimeout puede ser usado como parámetro en la funcion clearTimeout para que ese timeout nunca se ejecute, veamos un ejemplo</p>
+
+      <code>
+        <span class="reservada">const</span> idTimeout = <span class="reservada">setTimeout</span>((nombre) => {
+        <br>
+          <span class="tab1"><span class="reservada">console.log</span>(<span class="string">'El nombre es : '</span>, nombre)</span>
+        }, 5000, <span class="string">'Jonathan'</span>);
+        <br>
+        <span class="reservada">console.log</span>(<span class="string">'ID: '</span>, idTimeout);
+
+        <br><br>
+
+        <span class="reservada">clearTimeout</span>(idTimeout);
+
+        <br><br>
+
+        <span class="comentario">
+          // ID: 1
+        </span>
+      </code>
+
+      <h3>setInterval</h3>
+
+      <p>Este método es similar al setTimeout, la diferencia es que se ejecuta continuamente a medida que pasa el tiempo establecido en el parámetro de los milisegundos</p>
+
+      <p>La sintaxis completa del setTimeout es la siguiente:</p>
+
+      <p>const idInterval = setInterval(funcionAEjecutar, tiempoCadaCuantoSeEjecutaraElIntervalo, parametro1APasarALaFuncionLlamada, parametro2APasarALaFuncionLlamada, parametroEtcAPasarALaFuncionLlamada)</p>
+
+      <ul>
+        <li>idInterval: La función setInterval devuelve un numero para poder cancelar/limpiar ese intervalo</li>
+        <li>funcionAEjecutar: Como vimos anteriormente esa función sera la que se ejecute cuando pase el tiempo establecido</li>
+        <li>tiempoCadaCuantoSeEjecutaraElIntervalo: Tiempo entre cada ejecución del intervalo</li>
+        <li>parametro1APasarALaFuncionLlamada ...: Parámetros a pasar a la función que invocará la función de intervalos</li>
+      </ul>
+
+      <p>Veamos un ejemplo</p>
+
+      <code>
+        <span class="reservada">const</span> idInterval = <span class="reservada">setInterval</span>((nombre) => {
+        <br>
+          <span class="tab1"><span class="reservada">console.log</span>(<span class="string">'El nombre es : '</span>, nombre)</span>
+        }, 1000, <span class="string">'Jonathan'</span>);
+        <br>
+        <span class="reservada">console.log</span>(<span class="string">'ID: '</span>, idInterval);
+
+        <br><br>
+
+        <span class="comentario">
+          // ID: 1
+          <br>
+          // El nombre es : Jonathan
+          <br>
+          // ...
+          <br>
+          // El nombre es : Jonathan
+        </span>
+      </code>
+
+      <p>Aparecerá en la consola "El nombre es : Jonathan" cada un segundo (1000 milisegundos)</p>
+
+      <h3>clearInterval</h3>
+
+      <p>De la misma forma que tenemos un clearTimeout, tenemos un metodo para limpiar/detener los intervalos, el valor devuelto por el setInterval será el parámetro que reciba el clearInterval para poder detenerlo</p> 
+
+      <code>
+        <span class="reservada">const</span> idInterval = <span class="reservada">setInterval</span>((nombre) => {
+        <br>
+          <span class="tab1">
+            <span class="reservada">console.log</span>(<span class="string">'El nombre es : '</span>, nombre)
+          </span>
+          <span class="tab1">
+            <span class="reservada">clearInterval</span>(idInterval);
+          </span>
+        }, 1000, <span class="string">'Jonathan'</span>);
+        <br>
+        <span class="reservada">console.log</span>(<span class="string">'ID: '</span>, idInterval);
+
+        <br><br>
+
+        <span class="comentario">
+          // ID: 1
+          <br>
+          // El nombre es : Jonathan
+        </span>
+      </code>
+
+      <p>En este caso solo se muestra en la consola "El nombre es : Jonathan" una sola vez, dado que luego de eso se limpia el intervalo</p>
+
+      <h2>AJAX</h2>
+
+      <p>Si bien los metodos anteriores de setTimeout y setInterval nos permiten simular un asincronismo, el potencial de esta técnica viene dada por AJAX</p>
+
+      <p>La idea de esto es que vamos a realizar peticiones al servidor de la información necesaria y cuando la misma llegue refrescaremos un sector de la pagina, y no como era en el pasado que refrescabamos toda la página</p>
+
+      <p>Esto permite que, mientras se realizan las peticiones necesarias el servido, la página no quede bloqueda y el usuario pueda seguir interactuando con ella, y en el momento en que la data del servido llego, será procesada y mostrada en el lugar correspondiente teniendo solo un refresco selectivo de un sector puntual de la página actual del usuario</p>
+
+      <p>Para poder realizar peticiones AJAX necesitamos utilizar y configurar un objeto llamado XMLHttpRequest de la siguiente forma</p>
+
+      <p>Primero guardaremos en una variable una instancia de ese objeto de la siguiente forma</p>
+
+      <code>
+        <span class="reservada">const</span> xhr = <span class="reservada">new XMLHttpRequest</span>(); 
+        <span class="comentario">// XMLHttpRequest {onreadystatechange: null, readyState: 0, timeout: 0, withCredentials: false, upload: XMLHttpRequestUpload, …}</span>
+      </code>
+
+      <p>Una vez hecho esto tenemos que configurar 2 cosas, que método de HTTP usaremos y hacia que URL haremos la petición</p>
+
+      <p>Los métodos de HTTP puede ser: GET, POST, PUT, PATH y DELETE</p>
+
+      <p>Veamos una configuración para solicitar un archivo de texto a un servido</p>
+      
+      <code>
+        <span class="reservada">const</span> xhr = <span class="reservada">new XMLHttpRequest</span>();
+        <br><br>
+        xhr.<span class="reservada">open</span>(<span class="string">'get'</span>, <span class="string">'archivos/datos.txt'</span>);
+      </code>
+
+      <p>Una vez configurado el método y la URL a la que se realizará el pedido, nos queda enviar la petición con el método send de la siguiente forma</p>
+
+      <code>
+        <span class="reservada">const</span> xhr = <span class="reservada">new XMLHttpRequest</span>();
+        <br><br>
+        xhr.<span class="reservada">open</span>(<span class="string">'get'</span>, <span class="string">'archivos/datos.txt'</span>);
+        <br><br>
+        xhr.<span class="reservada">send</span>();
+      </code>
+
+      <p>Si estamos trabajando simplemente abriendo el archivo .html en el navegador nos dará un error en la consola de la siguiente forma</p>
+
+      <code>
+        <span class="error">
+          Access to XMLHttpRequest at 'file:///path-de-tu-carpeta/archivos/datos.txt' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: http, data, chrome, chrome-extension, https.
+        </span>
+      </code>
+
+      <p>Para poder realizar peticiones AJAX vamos a tener que estar dentro de un ambiente de servidor web, recomiendo utilizar <a href="https://www.apachefriends.org/es/index.html" target="_blank">XAMPP</a> para comenzar a trabajar con AJAX</p>
+
+      <p>Una vez configurado el servidor, vamos a ejecutar el mismo codigo dentro de un ambiente de servidor, mi archivo datos.txt tiene dentro el siguiente texto "Estos son los datos del servido" y nada mas, realicemos la petición y si todo esta correctamente configurado no deberiamos tener ningun error en la consola</p>
+
+      <code>
+        <span class="reservada">const</span> xhr = <span class="reservada">new XMLHttpRequest</span>();
+        <br><br>
+        xhr.<span class="reservada">open</span>(<span class="string">'get'</span>, <span class="string">'archivos/datos.txt'</span>);
+        <br><br>
+        xhr.<span class="reservada">send</span>();
+      </code>
+
+      <p>Pero... ¿donde estan mis datos?</p>
+
+      <p>Como estamos trabajando asincrónicamente lo que vamos a tener que realizar es una configuración de listener (escuchadores) cuando sucedan determinados eventos, así el navegador ejecutará las funciones que nosotros tenemos para procesar los datos</p>
+
+      <p>Por ejemplo le agregamos a nuestro objeto xhr un listener para el evento load y cuando ese evento ocurra veremos que tiene nuestro objeto en ese punto</p>
+
+      <code>
+        <span class="reservada">const</span> xhr = <span class="reservada">new XMLHttpRequest</span>();
+        <br><br> 
+        xhr.<span class="reservada">addEventListener</span>(<span class="string">'load'</span>, () => {
+          <span class="tab1">
+            <span class="reservada">console.log</span>(xhr.response); <span class="comentario">// Estos son los datos del servido</span>
+          </span>
+        });
+        <br><br>
+        xhr.<span class="reservada">open</span>(<span class="string">'get'</span>, <span class="string">'archivos/datos.txt'</span>);
+        <br><br>
+        xhr.<span class="reservada">send</span>();
+      </code>
+
+      <p>Como podemos observar en la propiedad "response" del objeto XMLHttpRequest que creamos tenemos los datos que se recibieron desde el servidor</p>
+
+
+    </section>
+  </body>
+</html>
