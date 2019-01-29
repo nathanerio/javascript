@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>JavaScript - Historial (History)</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../css/estilos.css">
+  </head>
+  <body>
+    <h1>JavaScript - Historial (History)</h1>
+
+    <section>
+      <h2>Historial (History)</h2>
+
+      <p>Es una interfaz que nos permite manipular la navegación del usuario, con ella podremos ir hacia adelante, hacia atras o incluso generar nuevos estados en la historia</p>
+
+      <p>Para poder manipularlo vamos a utilizar le objeto global "history" el cual posee los siguientes métodos y propiedades</p>
+
+      <h4>length</h4>
+
+      <p>Esta propiedad devuelve un número entero que representa cuantas páginas ha recorrido el usuario</p>
+
+      <code>
+        <span class="reservada">history</span>.<span class="reservada">length</span>; <span class="comentario">// 1</span>
+      </code>
+
+      <h4>back</h4>
+
+      <p>Este método permite retroceder a la página anterior del recorrido del usuario, es básicamente apretar el botón atras del navegador</p>
+
+      <code>
+        <span class="reservada">history</span>.<span class="reservada">back</span>();
+      </code>
+
+      <h4>forward</h4>
+
+      <p>Este método permite avanzar a la página siguiente del recorrido del usuario, es básicamente apretar el botón adelante del navegador</p>
+
+      <code>
+        <span class="reservada">history</span>.<span class="reservada">forward</span>();
+      </code>
+      
+      <h4>go</h4>
+
+      <p>Este método permite movernos hacia adelante o atras dependiendo del parámetro que se le pase de manera relativa a la página actual del usuario</p>
+
+      <p>Por ejemplo history.go(-1) es similar a history.back() o history.go(1) es similar a history.forward()</p>
+
+      <code>
+        <span class="reservada">history</span>.<span class="reservada">go</span>(2);
+      </code>
+
+      <p>El 2 (dos) pasado como parámetro es similar a apretar 2 veces el botón adelante del navegador o haber ejecutado 2 veces history.forward()</p>
+      
+      <h4>pushState</h4>
+
+      <p>Este método permite generar nuevos estados dentro del historia de navegación, lo interesante es que nos permite modificar la URL sin refrescar la página</p>
+
+      <p>Este método recibe 3 parametros pushState(estado, titulo, url) que son los siguientes:</p>
+
+      <ul>
+        <li>estado: Es un objeto con el estado a almacenar para la URL pasada</li>
+        <li>titulo: Titulo del estado</li>
+        <li>url: URL a establecer en el navegador, la url puede ser relativa o absoluta, pero en caso de que sea absoluta tiene que ser del mismo origen</li>
+      </ul>
+
+      <code>
+        <span class="reservada">history</span>.<span class="reservada">pushState</span>({data: <span class="boolean">true</span>}, <span class="string">'new state'</span>, <span class="string">'state.html'</span>); <span class="comentario">// La URL ahora finaliza con state.html sin embargo no se busco ese recurso en ningun momento</span>
+      </code>
+
+      <p>Como la URL puede ser relativa esta permitido el movimiento entre carpetas como ser "carpeta/archivp.html" o "../archivo.html"</p>
+
+      <h4>replaceState</h4>
+
+      <p>A diferencia del pushState que crea un nuevo estado dentro del historial, replaceState lo que me permite es modificar el estado actual de la aplicación, generalmente para modificar los datos que se pasan en el primer parámetro del metodo pushState, analogamente a ese método replaceState recibe los mismos tres parámetros, estado, titulo y url, es decir replaceState(estado, titulo, url)</p>
+
+      <code>
+        <span class="reservada">history</span>.<span class="reservada">replaceState</span>({data: <span class="boolean">false</span>}, <span class="string">'modify state'</span>, <span class="string">'state.html'</span>); <span class="comentario">// La URL ahora finaliza con state.html sin embargo no se busco ese recurso en ningun momento</span>
+      </code>
+
+      <h4>state</h4>
+
+      <p>Para consultar el estado que tiene asociada la página actual del historial tenemos que consultar por la propiedad state del history de la siguiente forma</p>
+
+      <code>
+        <span class="reservada">history</span>.<span class="reservada">state</span>; <span class="comentario">// {data: false}</span>
+      </code>
+
+      <h4>popstate (event)</h4>
+
+      <p>Para poder reaccionar a los cambios de la URL cuando el usuario va hacia atras o adelante con los botones del navegador tenemos un evento asociado a la ventana (window) que nos permite reaccionar a los cambios, este evento tiene asociado una propiedad llamada state con una copia al estado actual de la aplicación en ese punto</p>
+      
+      <code>
+        <span class="reservada">window.addEventListener</span>(<span class="string">'popstate'</span>, (e) => {
+          <span class="tab1">
+            <span class="reservada">console.log</span>(<span class="string">'Popstate: '</span>, e);
+            <span class="comentario">// Popstate:  PopStateEvent {isTrusted: true, state: {…}, type: "popstate", target: Window, currentTarget: Window, …}</span>
+            <br>
+            <span class="reservada">console.log</span>(e.state); <span class="comentario">// {data: false}</span>
+          </span> 
+        });
+      </code>
+
+      <section>
+
+        <h3>Hash</h3>
+
+        <p>Otra forma de manipular las URL sin necesidad de actualizar la página es trabajar con los hash de la misma, tambien denominados secciones, aparecen en la URL luego de un numeral (#)</p>
+
+        <p>Para poder establecer los hash podemos realizar lo siguiente</p>
+
+        <h4>location.hash</h4>
+
+        <p>Utilizando la propiedad hash del objeto location podemos establecer esas secciones que no refrescarán la página, veamos un ejemplo</p>
+
+        <code>
+          <span class="reservada">location.hash</span> = <span class="string">'productos'</span>;
+        </code>
+
+        <p>Técnicamente en caso de que el navegador encuentra esa sección dentro de nuestra página nos posicionará en ella</p>
+
+        <h4>hashchange (event)</h4>
+
+        <p>Para poder reaccionar a los cambios de hash tenemos un evento para la ventana (window) llamado hashchange, en el podremos realizar las operaciones que querramos</p>
+
+        <code>
+          <span class="reservada">window.addEventListener</span>(<span class="string">'hashchange'</span>, (e) => {
+            <span class="tab1">
+              <span class="reservada">console.log</span>(<span class="string">'Hashchange: '</span>, e); 
+              <span class="comentario">// HashChangeEvent {isTrusted: true, oldURL: "path-to-your-file/historial.html#productos", newURL: "path-to-your-file/historial.html#servicios", type: "hashchange", target: Window, …}</span>
+              <br>
+              <span class="reservada">console.log</span>(<span class="string">'OldURL: '</span>, e.oldURL); 
+              <span class="comentario">// path-to-your-file/historial.html#productos</span>
+              <br>
+              <span class="reservada">console.log</span>(<span class="string">'NewURL: '</span>, e.newURL); 
+              <span class="comentario">// path-to-your-file/historial.html#servicios</span>
+            </span>
+            
+          });
+        </code>
+      </section>
+    </section>
+  </body>
+</html>
