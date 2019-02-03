@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>JavaScript - Promises</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../css/estilos.css">
+  </head>
+  <body>
+    <h1>Promises</h1>
+
+    <button id="cambiarVista">Modo: Claro</button>
+
+    <section>
+      <h2>Promesas (Promises)</h2>
+      <p>Las promesas se usan cuando realizamos programación asincronicas y representan un valor que puede estar disponible inmediatamente, en un futuro o nunca</p>
+
+      <p>Una promesa puede estar en 3 posibles estados</p>
+
+      <ul>  
+          <li>Pending: Cuando la promesa todavia no fue resulta ni rechazada</li>
+          <li>Fulfilled: Cuando la promesa se resolvió satisfactoriamente</li>
+          <li>Rejected: Cuando la promesa ue rechazada, algo salió mal</li>
+      </ul>
+
+      <p>En la construcción de una promesa interviene una función que será lo que hay que realizar para conseguir el valor deseado, esta función recibe dos parámetros, los cuales son las funciones a ejecutar en caso de que todo salió bien y haya que resolver promesa como satisfactoria (fulfilled) o la función que se ejecutará si algo salió mal para que la promesa sea rechazada (rejected)</p>
+
+      <p>Para crear una promesa utilzamos el constuctor de promesas de la siguiente forma</p>
+
+      <code>  
+        <span class="reservada">const</span> promesa = <span class="reservada">new Promise</span>();
+        <span class="error">Uncaught TypeError: Promise resolver undefined is not a function</span>
+      </code>
+
+      <p>Acá estamos teniendo un error, porque en la creación de la promesa debemos pasar una función que será la encargada de buscar el valor de la siguiente forma</p>
+
+      <code>  
+        <span class="reservada">const</span> promesa = <span class="reservada">new Promise</span>(() => {});
+        <br>
+        <span class="reservada">console.log</span>(promesa);
+        <br>
+        <span class="comentario">
+          // Promise {<pending>} 
+            <br> __proto__: Promise 
+            <br> [[PromiseStatus]]: "pending"
+            <br> [[PromiseValue]]: undefined
+        </span>
+      </code>
+
+      <p>Vamos a simular asincronismo utilizando la función anteriormente vista de setTimeout de la siguiente forma:</p>
+
+      <code>
+        <span class="reservada">const</span> valor = <span class="reservada">new Promise</span>((resolve, reject) => {
+          <span class="tab1">
+            <span class="reservada">setTimeout</span>(() => {
+              <span class="tab2">resolve(10);</span>
+            }, 0); 
+          </span>
+        });
+        <br><br>
+        <span class="reservada">setTimeout</span>(() => {
+          <span class="tab1">
+            <span class="reservada">console.log</span>(valor);
+            <br>
+            <span class="comentario">
+            // Promise {<pending>} 
+            <br> __proto__: Promise 
+            <br> [[PromiseStatus]]: "resolved"
+            <br> [[PromiseValue]]: 10
+        </span>
+          </span>
+        }, 1000);
+      </code>
+
+      <p>Estamos generando una promesa que resolverá retornando el valor de 10, luego simplemente para ver que tiene la promesa dentro esperamos un segundo y hacemos el console.log, como se puede ver el estado de la promesa es resolved y el valor de la misma es 10</p>
+
+      <p>Podríamos rechazar la promesa de la siguiente forma</p>
+
+      <code>
+        <span class="reservada">const</span> rechazar = <span class="reservada">new Promise</span>((resolve, reject) => {
+          <span class="tab1">
+            <span class="reservada">setTimeout</span>(() => {
+              <span class="tab2">reject(<span class="string">'Error generado'</span>);</span>
+            }, 0); 
+          </span>
+        });
+        <br><br>
+        <span class="reservada">setTimeout</span>(() => {
+          <span class="tab1">
+            <span class="reservada">console.log</span>(rechazar);
+            <br>
+            <span class="comentario">
+            // Promise {<pending>} 
+            <br> __proto__: Promise 
+            <br> [[PromiseStatus]]: "rejected"
+            <br> [[PromiseValue]]: "Error generado"
+        </span>
+          </span>
+        }, 1000);
+      </code>
+
+      <p>Entonces como podemos ver, en caso de obtener el valor y queres resolver la promesa correctamente ejecutamos la función recibida en parametro resolve, en caso contrario, si hubo un error y necesitamos rechazar la promesa ejecutamos la función recibida en el parametro reject. Estos nombres puede cambiar, no necesariamente deben ser llamados asi, pero suele ser comun hacerlo de esa forma</p>
+
+      <p>Sin embargo, en ningún momento pasamos esas funciones, asi que ¿como hacemos para pasar esas funciones a la promesa?</p>
+
+      <h4>.then()</h4>
+
+      <p>Este metodo que es utilizado con las promesas recibe dos parametros que repesentan la funcion para resolver la promesa o la función para rechazarla, volviendo a los dos casos anteriores generaremos el tratamiento del dato recibido de una promesa correcta, y manipularemos el error en una promesa rechazada</p>
+
+      <p>Teniendo esta promesa</p>
+
+      <code>
+        <span class="reservada">const</span> resolverValor = <span class="reservada">new Promise</span>((resolve, reject) => {
+          <span class="tab1">
+            <span class="reservada">setTimeout</span>(() => {
+             <br> <br>
+            }, 0); 
+          </span>
+        });
+      </code>
+
+      <p>Podemos definir los dos parámetros de la siguiente forma</p>
+
+      <code>
+        resolverValor.<span class="reservada">then</span>((dato) => {
+          <span class="tab1">
+            <span class="reservada">console.log</span>(<span class="string">'El dato es: '</span>, dato)
+          </span>
+        }, (error) => {
+          <span class="tab1">
+            <span class="reservada">console.log</span>(<span class="string">'El error fue: '</span>, error);
+          </span>
+        });
+      </code>
+
+      <p>Como se puede ver .then() esta recibiendo dos funciones, la primera sera la función tomada como resolve y la segunda como reject, por lo cual si volvemos a la definición de nuestra promesa y dentro del setTimeout llamamos a resolve</p>
+
+      <code>
+        <span class="reservada">const</span> resolverValor = <span class="reservada">new Promise</span>((resolve, reject) => {
+          <span class="tab1">
+            <span class="reservada">setTimeout</span>(() => {
+              <span class="tab1">resolve(100);</span>
+            }, 0); 
+          </span>
+        });
+      </code>
+
+      <p>Veremos en la consola</p>
+
+      <code>
+        <span class="comentario">// El dato es:  100</span>
+      </code>
+
+      <p>Por el contrario, si dentro del setTimeout llamamos a la función reject</p>
+
+      <code>
+        <span class="reservada">const</span> resolverValor = <span class="reservada">new Promise</span>((resolve, reject) => {
+          <span class="tab1">
+            <span class="reservada">setTimeout</span>(() => {
+              <span class="tab1">reject(<span class="string">'archivo no encontrado'</span>);</span>
+            }, 0); 
+          </span>
+        });
+      </code>
+
+      <p>Veremos en la consola lo siguiente</p>
+
+      <code>
+        <span class="comentario">// El error fue:  archivo no encontrado</span>
+      </code>
+
+      <h4>.catch()</h4>
+
+      <p>Otra forma de escritura para la resolución de las promesas es usar solo el .then() para la parte del resolve y utilizar el .catch() para la parte del reject, por lo cual el codigo anterior podriamos escribirlo de la siguiente forma</p>
+
+      <code>
+        resolverValor
+        <span class="tab1">
+          <span class="reservada">.then</span>(dato => {
+            <span class="tab2">
+              <span class="reservada">console.log</span>(<span class="string">'El dato es: '</span>, dato)
+            </span>
+          }) 
+          <br>
+          <span class="reservada">.catch</span>(error => {
+            <span class="tab2">
+              <span class="reservada">console.log</span>(<span class="string">'El error fue: '</span>, error);
+            </span>
+          });
+        </span>
+      </code>
+
+      <p>Y el resultado será igual que en el código anterior "El dato es:  100" en el caso del resolve y "El error fue:  archivo no encontrado" en el caso del reject</p>
+
+      <h4>.finally()</h4>
+
+      <p>En caso de querer ejecutar un bloque de código al final de la ejecución de una promesa sin importar si esta se resolvió correctamente o si fue rechazada podemos utilizar el .finally() este metodo se ejecutá sin importar en que estado finalizó la promesa, utilizando el código anterior agregariamos este metodo al final de la siguiente forma</p>
+
+      <code>
+        resolverValor
+        <span class="tab1">
+          <span class="reservada">.then</span>(dato => {
+            <span class="tab2">
+              <span class="reservada">console.log</span>(<span class="string">'El dato es: '</span>, dato)
+            </span>
+          }) 
+          <br>
+          <span class="reservada">.catch</span>(error => {
+            <span class="tab2">
+              <span class="reservada">console.log</span>(<span class="string">'El error fue: '</span>, error);
+            </span>
+          })
+          <br>
+          <span class="reservada">.finally</span>(() => {
+            <span class="tab2">
+              <span class="reservada">console.log</span>(<span class="string">'Finalizó la ejecución de la promesa'</span>);
+            </span>
+          });
+        </span>
+      </code>
+
+      <p>Y con esto luego del mensaje que ya teniamos anteriormente sea "El dato es:  100" o "El error fue:  archivo no encontrado" veremos al final en la consolta "Finalizó la ejecución de la promesa"</p>
+
+      <h4 style="display:none;">Promise.all</h4>
+
+    </section>
+    
+    <script src="../js/script.js"></script>
+  </body>
+</html>
